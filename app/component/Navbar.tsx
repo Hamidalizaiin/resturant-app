@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useContext } from 'react';
 import { FaCartShopping } from "react-icons/fa6";
-import { CartContext } from '../cartContext/cartContext';
+import { CartContext } from '../cartContext/CartContext';
 
 
 const Navbar = () => {

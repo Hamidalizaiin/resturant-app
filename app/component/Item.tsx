@@ -26,6 +26,7 @@ const Item = () => {
             // }
             setLoading(false);
 
+
         };
         getData();
 
@@ -95,7 +96,7 @@ const Item = () => {
 
             </div>
             {data.length <= 0 ? (
-                <p className='text-black'>Loading...</p>
+                <p className='text-black'>{Loading...}</p>
             ) : (
                 <div className='grid grid-cols-1 w-full py-12 px-12 gap-3 place-items-center   sm:grid-cols-2 md:grid-cols-3  '>
                     {filteredList.map((item: any, index: number) => {

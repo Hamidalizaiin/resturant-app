@@ -1,8 +1,8 @@
 'use client'
 import React, { useContext } from 'react'
-import { CartContext } from '../cartContext/cartContext'
+import { CartContext } from '../cartContext/CartContext'
 
-const cartPage = () => {
+const CzartPage = () => {
     const { cart } = useContext(CartContext)
 
     if (cart.length <= 0) {
@@ -64,5 +64,5 @@ const cartPage = () => {
     )
 }
 
-export default cartPage
+export default CzartPage
 

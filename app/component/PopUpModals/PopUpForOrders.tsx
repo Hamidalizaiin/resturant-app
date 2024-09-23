@@ -2,7 +2,7 @@
 import Image from "next/image"
 import { useContext, useState } from "react"
 import PopUp from "./PopUpContainer"
-import { CartContext } from "@/app/cartContext/cartContext"
+import { CartContext } from "@/app/cartContext/CartContext"
 import burger from '@/app/public/food_items_pic/fries.png'
 const PopUpForOrders = ({ orderData, setOrderData, setIsPopUp, isPopUp }:
     { orderData: any, setOrderData: any, setIsPopUp: any, isPopUp: any }) => {
