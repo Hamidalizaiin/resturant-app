@@ -8,13 +8,13 @@ import ReactStars from 'react-stars'
 
 
 const Item = () => {
-     // const [loading, setLoading] = useState(true);
-     const [data, setData] = useState<any[]>([]);
+    // const [loading, setLoading] = useState(true);
+    const [data, setData] = useState<any[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [option, setOption] = useState('All');
     const [isPopUp, setIsPopUp] = useState(false);
     const [orderData, setOrderData] = useState({ name: '', itemQuantity: 0, price: 0, coldDrinkName: "", coldDrinkSize: "" })
-
+    console.log(process.env.NEXT_PUBLIC_API_URL);
     useEffect(() => {
         // setLoading(true)
         const getData = async () => {
