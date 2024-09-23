@@ -1,41 +1,48 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import burger from '@/app/public/food_items_pic/fries.png';
 import Image from 'next/image';
 import ReactStars from "react-rating-stars-component";
-
-async function fetchData() {
-    const response = await fetch('http://localhost:3000/api/foodItems');
-    if (!response.ok) {
-        throw new Error('Failed to fetch data');
-    }
-    const data = await response.json();
-    return data;
-}
-
+import { CartContext } from '../cartContext/cartContext';
+import PopUp from './PopUpModals/PopUpContainer';
+import PopUpForOrders from './PopUpModals/PopUpForOrders';
+ 
 const Item = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<any[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [option, setOption] = useState('All');
-    let [quantity, setQuantity] = useState(0);
+    const [isPopUp, setIsPopUp] = useState(false);
+    const [orderData, setOrderData] = useState({ name: '', itemQuantity: 0, price: 0, coldDrinkName: "", coldDrinkSize: "" })
+
+    console.log(loading,data);
+
 
     useEffect(() => {
-
+        setLoading(true)
         const getData = async () => {
-            try {
-                const fetchedData = await fetchData();
-                setData(fetchedData);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+            const response = await fetch('http://localhost:3000/api/foodItems');
+            const fetchedData = await response.json();
+            setData(fetchedData);
+            // if (fetchedData && fetchedData.length > 0) {
+            // } else {
+            // }
+            setLoading(false);
 
+        };
         getData();
-    }, []);
-    console.log(data);
+
+    }, [data.length]);
+
+
+    const filteredList = data.filter((item: any) => {
+        if (option.toLocaleLowerCase() == 'all') {
+            return item
+        } else {
+            return item.type.toLocaleLowerCase() == option.toLocaleLowerCase()
+        }
+    })
+
 
     return (
         <>
@@ -93,33 +100,45 @@ const Item = () => {
             {data.length <= 0 ? (
                 <p className='text-black'>Loading...</p>
             ) : (
-                <div className='grid grid-cols-1 w-full py-12 px-12 gap-3 place-items-center   sm:grid-cols-2 md:grid-cols-3  '>
-                    {data.map((item: any, index: number) => {
-                        return (
-                            <div className=' py-2 border-2 border-secondary flex flex-row rounded-md shadow-lg hover:shadow-red-400  transition-all ease-in-out duration-100 w-[100%]'>
-                                <Image src={burger} alt='' className='w-1/2' />
-                                <div className='w-full flex flex-col justify-center'>
-                                    <h2 className='text-2xl font-bold text-secondary'>{item.food_item}</h2>
-                                    <p className='text-black'>${item.price}</p>
-                                    
-                                    <ReactStars
+            <div className='grid grid-cols-1 w-full py-12 px-12 gap-3 place-items-center   sm:grid-cols-2 md:grid-cols-3  '>
+                {filteredList.map((item: any, index: number) => {
+
+                    return (
+                        <div key={index} className=' py-2 border-2 border-secondary flex flex-row rounded-md shadow-lg hover:shadow-red-400  transition-all ease-in-out duration-100 w-[100%]'>
+                            <Image src={burger} alt='' className='w-1/2' />
+                            <div className='w-full flex flex-col justify-center'>
+                                <h2 className='text-2xl font-bold text-secondary'>{item.food_item}</h2>
+                                <p className='text-black'>${item.price}</p>
+
+                                <ReactStars
                                         count={5}
                                         value={item.ratings}
                                         size={24}
                                         edit={false}
                                         activeColor="#ffd700"
                                     />
-                                    <div
-                                        className='bg-secondary  rounded-md text-white text-center p-1 transition-all ease-in-out border-2 cursor-pointer border-secondary hover:bg-white hover:text-secondary   w-[80%]  '>
-                                        Order Now
-                                    </div>
-                                </div>
+                                <div
+                                    className='bg-secondary  rounded-md text-white text-center p-1 transition-all ease-in-out border-2 cursor-pointer border-secondary hover:bg-white hover:text-secondary   w-[80%]  '
+                                    onClick={() => {
+                                        setOrderData({
+                                            ...orderData,
+                                            name: item.food_item,
+                                            price: item.price,
+                                        })
+                                        setIsPopUp(true)
+                                    }}
+                                >
 
+                                    Order Now
+                                </div>
                             </div>
-                        );
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
+            </div >
+
             )}
+            <PopUpForOrders orderData={orderData} setOrderData={setOrderData} setIsPopUp={setIsPopUp} isPopUp={isPopUp} />
         </>
     );
 };
