@@ -8,6 +8,7 @@ const PopUpForOrders = ({ orderData, setOrderData, setIsPopUp, isPopUp }:
     { orderData: any, setOrderData: any, setIsPopUp: any, isPopUp: any }) => {
     const [selectedSize, setSelectedSize] = useState('500ml')
     const [selectedDrink, setselectedDrink] = useState('Pepsi')
+    // eslint-disable-next-line prefer-const
     let [quantity, setQuantity] = useState(1);
     const { cart, setCart } = useContext(CartContext)
 
