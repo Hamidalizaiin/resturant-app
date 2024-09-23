@@ -8,10 +8,8 @@ import ReactStars from 'react-stars'
 
 
 const Item = () => {
-    // eslint-disable-next-line prefer-const
-    // const [loading, setLoading] = useState(true);
-    // eslint-disable-next-line prefer-const
-    const [data, setData] = useState<any[]>([]);
+     // const [loading, setLoading] = useState(true);
+     const [data, setData] = useState<any[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [option, setOption] = useState('All');
     const [isPopUp, setIsPopUp] = useState(false);
@@ -20,7 +18,7 @@ const Item = () => {
     useEffect(() => {
         // setLoading(true)
         const getData = async () => {
-            const response = await fetch('http://localhost:3000/api/foodItems');
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/foodItems`);
             const fetchedData = await response.json();
             setData(fetchedData);
             // if (fetchedData && fetchedData.length > 0) {
