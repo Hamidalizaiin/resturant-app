@@ -2,11 +2,11 @@
 import { useContext, useEffect, useState } from 'react';
 import burger from '@/app/public/food_items_pic/fries.png';
 import Image from 'next/image';
-import ReactStars from "react-rating-stars-component";
-import { CartContext } from '../cartContext/cartContext';
-import PopUp from './PopUpModals/PopUpContainer';
 import PopUpForOrders from './PopUpModals/PopUpForOrders';
- 
+import ReactStars from 'react-stars'
+
+
+
 const Item = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState<any[]>([]);
@@ -15,7 +15,7 @@ const Item = () => {
     const [isPopUp, setIsPopUp] = useState(false);
     const [orderData, setOrderData] = useState({ name: '', itemQuantity: 0, price: 0, coldDrinkName: "", coldDrinkSize: "" })
 
-    console.log(loading,data);
+    console.log(loading, data);
 
 
     useEffect(() => {
@@ -100,42 +100,41 @@ const Item = () => {
             {data.length <= 0 ? (
                 <p className='text-black'>Loading...</p>
             ) : (
-            <div className='grid grid-cols-1 w-full py-12 px-12 gap-3 place-items-center   sm:grid-cols-2 md:grid-cols-3  '>
-                {filteredList.map((item: any, index: number) => {
+                <div className='grid grid-cols-1 w-full py-12 px-12 gap-3 place-items-center   sm:grid-cols-2 md:grid-cols-3  '>
+                    {filteredList.map((item: any, index: number) => {
 
-                    return (
-                        <div key={index} className=' py-2 border-2 border-secondary flex flex-row rounded-md shadow-lg hover:shadow-red-400  transition-all ease-in-out duration-100 w-[100%]'>
-                            <Image src={burger} alt='' className='w-1/2' />
-                            <div className='w-full flex flex-col justify-center'>
-                                <h2 className='text-2xl font-bold text-secondary'>{item.food_item}</h2>
-                                <p className='text-black'>${item.price}</p>
+                        return (
+                            <div key={index} className=' py-2 border-2 border-secondary flex flex-row rounded-md shadow-lg hover:shadow-red-400  transition-all ease-in-out duration-100 w-[100%]'>
+                                <Image src={burger} alt='' className='w-1/2' />
+                                <div className='w-full flex flex-col justify-center'>
+                                    <h2 className='text-2xl font-bold text-secondary'>{item.food_item}</h2>
+                                    <p className='text-black'>${item.price}</p>
 
-                                <ReactStars
+                                    <ReactStars
                                         count={5}
-                                        value={item.ratings}
+                                        value={3}
                                         size={24}
-                                        edit={false}
-                                        activeColor="#ffd700"
+                                        color2={'#ffd700'}
                                     />
-                                <div
-                                    className='bg-secondary  rounded-md text-white text-center p-1 transition-all ease-in-out border-2 cursor-pointer border-secondary hover:bg-white hover:text-secondary   w-[80%]  '
-                                    onClick={() => {
-                                        setOrderData({
-                                            ...orderData,
-                                            name: item.food_item,
-                                            price: item.price,
-                                        })
-                                        setIsPopUp(true)
-                                    }}
-                                >
+                                    <div
+                                        className='bg-secondary  rounded-md text-white text-center p-1 transition-all ease-in-out border-2 cursor-pointer border-secondary hover:bg-white hover:text-secondary   w-[80%]  '
+                                        onClick={() => {
+                                            setOrderData({
+                                                ...orderData,
+                                                name: item.food_item,
+                                                price: item.price,
+                                            })
+                                            setIsPopUp(true)
+                                        }}
+                                    >
 
-                                    Order Now
+                                        Order Now
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    );
-                })}
-            </div >
+                        );
+                    })}
+                </div >
 
             )}
             <PopUpForOrders orderData={orderData} setOrderData={setOrderData} setIsPopUp={setIsPopUp} isPopUp={isPopUp} />

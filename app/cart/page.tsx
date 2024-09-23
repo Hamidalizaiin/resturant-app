@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { CartContext } from '../cartContext/cartContext'
 
 const cartPage = () => {
-    const { cart, setCart } = useContext(CartContext)
+    const { cart } = useContext(CartContext)
 
     if (cart.length <= 0) {
         return (
