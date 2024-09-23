@@ -8,7 +8,7 @@ import { CartContext } from '../cartContext/cartContext';
 
 
 const Navbar = () => {
-  const { cart, setCart } = useContext(CartContext)
+  const { cart } = useContext(CartContext)
 
   return (
     <nav className="hidden justify-between items-center px-12 bg-white sm:flex">

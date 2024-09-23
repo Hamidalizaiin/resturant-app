@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import burger from '@/app/public/food_items_pic/fries.png';
 import Image from 'next/image';
 import PopUpForOrders from './PopUpModals/PopUpForOrders';
@@ -14,9 +14,6 @@ const Item = () => {
     const [option, setOption] = useState('All');
     const [isPopUp, setIsPopUp] = useState(false);
     const [orderData, setOrderData] = useState({ name: '', itemQuantity: 0, price: 0, coldDrinkName: "", coldDrinkSize: "" })
-
-    console.log(loading, data);
-
 
     useEffect(() => {
         setLoading(true)
