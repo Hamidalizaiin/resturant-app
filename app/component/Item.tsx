@@ -9,7 +9,7 @@ import ReactStars from 'react-stars'
 
 const Item = () => {
     // eslint-disable-next-line prefer-const
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     // eslint-disable-next-line prefer-const
     const [data, setData] = useState<any[]>([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ const Item = () => {
     const [orderData, setOrderData] = useState({ name: '', itemQuantity: 0, price: 0, coldDrinkName: "", coldDrinkSize: "" })
 
     useEffect(() => {
-        setLoading(true)
+        // setLoading(true)
         const getData = async () => {
             const response = await fetch('http://localhost:3000/api/foodItems');
             const fetchedData = await response.json();
@@ -26,7 +26,7 @@ const Item = () => {
             // if (fetchedData && fetchedData.length > 0) {
             // } else {
             // }
-            setLoading(false);
+            // setLoading(false);
 
 
         };
