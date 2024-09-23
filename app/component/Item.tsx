@@ -10,6 +10,7 @@ import ReactStars from 'react-stars'
 const Item = () => {
     // eslint-disable-next-line prefer-const
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line prefer-const
     const [data, setData] = useState<any[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [option, setOption] = useState('All');

@@ -9,7 +9,7 @@ const CzartPage = () => {
         return (
             <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
                 <h2 className="text-xl font-semibold text-gray-700 mb-2">Your Cart is Empty!</h2>
-                <p className="text-gray-500 mb-4">Looks like you haven't added anything to your cart yet.</p>
+                <p className="text-gray-500 mb-4">Looks like you havenot added anything to your cart yet.</p>
                 <button
                     className="transition-all ease-in-out bg-secondary  text-white px-6 py-2 rounded-md border-2 border-secondary hover:text-secondary hover:bg-white hover:shadow-md">
                     Lets Select Some Cheezy
