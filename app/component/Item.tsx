@@ -8,25 +8,17 @@ import ReactStars from 'react-stars'
 
 
 const Item = () => {
-    // const [loading, setLoading] = useState(true);
     const [data, setData] = useState<any[]>([]);
     const [isOpen, setIsOpen] = useState(false);
     const [option, setOption] = useState('All');
     const [isPopUp, setIsPopUp] = useState(false);
     const [orderData, setOrderData] = useState({ name: '', itemQuantity: 0, price: 0, coldDrinkName: "", coldDrinkSize: "" })
-    console.log(process.env.NEXT_PUBLIC_API_URL);
+
     useEffect(() => {
-        // setLoading(true)
         const getData = async () => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/foodItems`);
             const fetchedData = await response.json();
             setData(fetchedData);
-            // if (fetchedData && fetchedData.length > 0) {
-            // } else {
-            // }
-            // setLoading(false);
-
-
         };
         getData();
 
@@ -80,14 +72,14 @@ const Item = () => {
 
                     {/* Dropdown options */}
                     <div
-                        className={isOpen ? 'absolute text-secondary bg-gray-50 w-[220px] px-4 py-3 ring-1 ring-gray-300 shadow-md shadow-gray-400' : 'hidden'}
+                        className={isOpen ? 'z-10 absolute text-secondary bg-gray-50 w-[220px] px-4 py-3 ring-1 ring-gray-300 shadow-md shadow-gray-400' : 'hidden'}
                     >
-                        <p onClick={() => setOption('All')}>All</p>
-                        <p onClick={() => setOption('Fast Food')}>Fast Food</p>
-                        <p onClick={() => setOption('Main Course')}>Main Course</p>
-                        <p onClick={() => setOption('Appetizer')}>Appetizer</p>
-                        <p onClick={() => setOption('Snack')}>Snack</p>
-                        <p onClick={() => setOption('Dessert')}>Dessert</p>
+                        <p onClick={() => { setIsOpen(false); setOption('All') }}>All</p>
+                        <p onClick={() => { setIsOpen(false); setOption('Fast Food') }}>Fast Food</p>
+                        <p onClick={() => { setIsOpen(false); setOption('Main Course') }}>Main Course</p>
+                        <p onClick={() => { setIsOpen(false), setOption('Appetizer') }}>Appetizer</p>
+                        <p onClick={() => { setIsOpen(false), setOption('Snack') }}>Snack</p>
+                        <p onClick={() => { setIsOpen(false), setOption('Dessert') }}>Dessert</p>
                     </div>
                 </div>
                 <div className="rounded-md w-30 bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
