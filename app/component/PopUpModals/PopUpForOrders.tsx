@@ -10,7 +10,7 @@ const PopUpForOrders = ({ orderData, setOrderData, setIsPopUp, isPopUp }:
     // eslint-disable-next-line prefer-const
     let [quantity, setQuantity] = useState(1);
     const { cart, setCart } = useContext(CartContext)
-    const { name, itemQuantity, price, coldDrinkName, coldDrinkSize } = orderData
+    const { coldDrinkName, coldDrinkSize } = orderData
 
     function selectDrink(e: any) {
         setOrderData({
